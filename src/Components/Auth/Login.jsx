@@ -57,13 +57,16 @@ const Login = () => {
         }
       })
       .catch((error) => {
-        toast.error(error.message);
+        toast.error(error.response.data.responseMessage);
       });
   };
 
   const handleOtpSubmit = async (otp) => {
+    const endpoint = forgotPasswordModal
+      ? `${BASE_URL}/verifyOtp`
+      : `${BASE_URL}/verifyLoginOtp`;
     try {
-      const response = await axios.put(`${BASE_URL}/verifyLoginOtp`, {
+      const response = await axios.put(endpoint, {
         email: email,
         otp: parseInt(otp, 10),
       });
@@ -94,6 +97,8 @@ const Login = () => {
         toast.success(response.data.responseMessage);
         setOtpModal(true);
         setForgotPasswordModal(true); // Set state to indicate forgot password modal opened
+      } else if (response.data.responseCode === 402) {
+        toast.error(response.data.responseMessage);
       } else {
         toast.error(response.data.responseMessage);
       }
