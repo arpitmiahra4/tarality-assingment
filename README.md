@@ -23,7 +23,12 @@ This project is a React application that utilizes various libraries such as MUI 
 - Update Profile/Password User Account
 - Private Routes
 
-
+## How_To_Run
+Open Terminal in Vs Code and follow the below Instruction's
+- git clone https://github.com/arpitmiahra4/tarality-assingment.git
+- cd tarality-assingment
+- npm install (to install required packages)
+- npm run start (to run the application locally)
 
 <h2>📬 Contact</h2>
 
