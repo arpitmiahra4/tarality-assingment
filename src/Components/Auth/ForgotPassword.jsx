@@ -21,27 +21,7 @@ const ForgotPasswordSchema = Yup.object().shape({
 });
 
 const ForgotPassword = () => {
-  const [otpModal, setOtpModal] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
-
-  const handleOtpSubmit = async (otp) => {
-    try {
-      const response = await axios.post(`${BASE_URL}/verifyLoginOtp`, {
-        email: userEmail,
-        otp: parseInt(otp, 10),
-      });
-      if (response.data.responseCode === 200) {
-        toast.success("PassWord Changed Successfully");
-        navigate("/login");
-      } else {
-        toast.error(response.data.responseMessage);
-      }
-    } catch (error) {
-      toast.error(error.response.data.responseMessage);
-    }
-    setOtpModal(false);
-  };
 
   const handleForget = async (values) => {
     try {
@@ -58,8 +38,6 @@ const ForgotPassword = () => {
       });
       if (response.data.responseCode === 200) {
         toast.success(response.data.responseMessage);
-        setUserEmail(values.email);
-        setOtpModal(true);
       }
     } catch (error) {
       if (error.response.data.responseCode === 405) {
@@ -160,13 +138,6 @@ const ForgotPassword = () => {
           </Formik>
         </Grid>
       </Grid>
-      {/* <!-- Modal container --> */}
-      <OtpModal
-        open={otpModal}
-        onClose={() => setOtpModal(false)}
-        email={userEmail}
-        onSubmit={handleOtpSubmit}
-      />
     </>
   );
 };
