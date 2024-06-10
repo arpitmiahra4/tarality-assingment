@@ -3,7 +3,8 @@
 
 This project is a React application that utilizes various libraries such as MUI for UI components, Axios for HTTP requests, React Icons for icons, React Toastify for notifications, Formik and Yup for form validation, and more.
 
-[Visit Now]() 🚀
+## Live Preview
+[Visit Now](https://tarality-assingment-6hqr.vercel.app/) 🚀
 
 ## 🖥️ Tech Stack
 **Frontend:**
