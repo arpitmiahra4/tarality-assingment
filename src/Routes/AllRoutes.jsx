@@ -34,10 +34,7 @@ const AllRoutes = () => {
         path="/dashboard"
         element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />}
       />
-      <Route
-        path="/resetPassword"
-        element={isAuthenticated ? <Navigate to="/" /> : <ForgotPassword />}
-      />
+      <Route path="/resetPassword" element={<ForgotPassword />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

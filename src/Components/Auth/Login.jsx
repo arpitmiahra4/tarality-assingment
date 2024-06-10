@@ -20,7 +20,7 @@ const Login = () => {
   const checkEmail = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}/chackEmailExist?email=${email}`,
+        `${BASE_URL}/chackEmailExist?email=${email}`
       );
 
       if (response.data.responseResult) {
@@ -63,28 +63,30 @@ const Login = () => {
 
   const handleOtpSubmit = async (otp) => {
     const endpoint = forgotPasswordModal
-    ? `${BASE_URL}/verifyOtp`
-    : `${BASE_URL}/verifyLoginOtp`;
-  
-  const method = forgotPasswordModal ? 'post' : 'put';
+      ? `${BASE_URL}/verifyOtp`
+      : `${BASE_URL}/verifyLoginOtp`;
 
-  try {
-    const response = await axios({
-      method: method,
-      url: endpoint,
-      data: {
-        email: email,
-        otp: parseInt(otp, 10),
-      },
-    });
+    const method = forgotPasswordModal ? "post" : "put";
+
+    try {
+      const response = await axios({
+        method: method,
+        url: endpoint,
+        data: {
+          email: email,
+          otp: parseInt(otp, 10),
+        },
+      });
+      // Check if the response code is 200 (success)
       if (response.data.responseCode === 200) {
         toast.success(response.data.responseMessage);
-        localStorage.setItem("accessToken", response.data.result.token);
-        login();
+
         if (forgotPasswordModal) {
-          navigate("/resetPassword"); // Redirect to forgotPassword route if modal opened by forgot password
+          navigate("/resetPassword");
         } else {
-          navigate("/dashboard"); // Redirect to dashboard if modal opened by login
+          localStorage.setItem("accessToken", response.data.result.token);
+          login();
+          navigate("/dashboard");
         }
       } else {
         toast.error(response.data.responseMessage);
