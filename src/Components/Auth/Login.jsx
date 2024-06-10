@@ -63,13 +63,20 @@ const Login = () => {
 
   const handleOtpSubmit = async (otp) => {
     const endpoint = forgotPasswordModal
-      ? `${BASE_URL}/verifyOtp`
-      : `${BASE_URL}/verifyLoginOtp`;
-    try {
-      const response = await axios.put(endpoint, {
+    ? `${BASE_URL}/verifyOtp`
+    : `${BASE_URL}/verifyLoginOtp`;
+  
+  const method = forgotPasswordModal ? 'post' : 'put';
+
+  try {
+    const response = await axios({
+      method: method,
+      url: endpoint,
+      data: {
         email: email,
         otp: parseInt(otp, 10),
-      });
+      },
+    });
       if (response.data.responseCode === 200) {
         toast.success(response.data.responseMessage);
         localStorage.setItem("accessToken", response.data.result.token);
