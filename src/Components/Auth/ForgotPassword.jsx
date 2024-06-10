@@ -38,6 +38,7 @@ const ForgotPassword = () => {
       });
       if (response.data.responseCode === 200) {
         toast.success(response.data.responseMessage);
+        navigate("/")
       }
     } catch (error) {
       if (error.response.data.responseCode === 405) {
